@@ -75,5 +75,8 @@ $(function () {
 			? input.attr("type", "text")
 			: input.attr("type", "password");
 	});
-
+	$("#newAddressBtn").click(function () {
+			$("#newAddress").slideToggle(1500);
+	});
+	$("#newAddress").hide();
 });
