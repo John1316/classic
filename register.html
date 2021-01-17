@@ -30,7 +30,7 @@
                 <img class="h-80px mb-4" src="assets/img/Logo/logo-colourful.png" alt="">
             </div>
 
-            <form action="" method="" id="registerForm">
+            <form action="register.html" method="GET" id="registerForm">
                 <div class="row">
                     
                     <div class="col-12">
@@ -42,13 +42,13 @@
                     <div class="col-md-6 col-12">
                         <div class="form-group mb-1">
                             <label for="phone">Phone</label>
-                            <input type="text" onchange="validationForm();" onkeyup="phone_validate(this.value);" id="phone" class="form-control" name="phone">
+                            <input type="number"  id="phone" class="form-control" name="phone">
                         </div>        
                     </div>
                     <div class="col-md-6 col-12">
                         <div class="form-group mb-1">
                             <label for="email">Email</label>
-                            <input type="text" onchange="validationForm();" onkeyup="email_validate(this.value);" id="mail" class="form-control" name="email">
+                            <input type="email"  id="mail" class="form-control" name="email">
                         </div>
                     </div>
                     <div class="col-md-6 col-12 mt-3">
@@ -84,7 +84,7 @@
                 </div>
 
                 <div class="form-group">
-                    <button  class="btn btn-block btn-main my-3 disabled" id="registerBtn" type="button">Register</button>
+                    <button disabled  class="btn btn-block btn-main my-3" id="registerBtn" type="submit">Register</button>
                 </div>
             </form>
 
@@ -101,8 +101,8 @@
         <script>
             let checkPassVal = false ;
             let checkPasswordVal = false ;
-            let checkEmailVal= false ;
-            let checkPhoneVal= false ;
+            // let checkEmailVal= false ;
+            // let checkPhoneVal= false ;
 
 
             function checkPass() {
@@ -122,6 +122,8 @@
                 } else {
                   //The passwords do not match.
                   //notify the user.
+                    checkPassVal = false;
+
                     message.innerHTML = "<div class='alert alert-danger mb-0' role='alert'>Password doesn't match</div>"
                 }
             }
@@ -129,8 +131,9 @@
                 let password = document.getElementById('password');
                 let passwordValidation = document.getElementById('passwordValidation');
                 if(password.value.length < 8){
-                    
                     passwordValidation.innerHTML = "<div class='alert alert-danger'>Your password is less than 8</div>"
+                    checkPasswordVal = false;
+
                 }
                 else{
                     passwordValidation.innerHTML="";
@@ -138,40 +141,54 @@
                     console.log(checkPasswordVal);
                 }
             }
-            function email_validate(mail) {
-                let regMail = /^([_a-zA-Z0-9-]+)(\.[_a-zA-Z0-9-]+)*@([a-zA-Z0-9-]+\.)+([a-zA-Z]{2,3})$/;
-                if (regMail.test(mail) == false) {
-                    document.getElementById("email").innerHTML = "<div class='alert alert-danger mb-0'>Your email is not valid yet!</div>";
+            // function email_validate(mail) {
+            //     let regMail = /^([_a-zA-Z0-9-]+)(\.[_a-zA-Z0-9-]+)*@([a-zA-Z0-9-]+\.)+([a-zA-Z]{2,3})$/;
+            //     if (regMail.test(mail) == false) {
+            //         checkEmailVal = false;
+            //         document.getElementById("email").innerHTML = "<div class='alert alert-danger mb-0'>Your email is not valid yet!</div>";
+            //         console.log(1);
 
-                }
-                else {
-                    document.getElementById("email").innerHTML = "";
-                    checkEmailVal = true;
-                }
-            }
-            function phone_validate(phone) {
-                let regPhone = /^01[0|1|2|5]{1}[0-9]{8}$/;
+            //     }
+            //     else {
+            //         console.log(2);
+            //         checkEmailVal = true;
+
+            //         document.getElementById("email").innerHTML = "";
+            //     }
+            // }
+            // function phone_validate(phone) {
+            //     let regPhone = /^01[0|1|2|5]{1}[0-9]{8}$/;
 
 
-                if (regPhone.test(phone) == false) {
-                    document.getElementById("phoneval").innerHTML = "<div class='alert alert-danger'>Your phone is not found in our country</div>";
-                    
-                }
-                else {
-                    document.getElementById("phoneval").innerHTML = "";
-                    checkPhoneVal = true;
-                }
-            }
+            //     if (regPhone.test(phone) == false) {
+            //         document.getElementById("phoneval").innerHTML = "<div class='alert alert-danger'>Your phone is not found in our country</div>";
+            //         console.log(1);
+            //         checkPhoneVal = false;
+
+            //     }
+            //     else {
+            //         document.getElementById("phoneval").innerHTML = "";
+            //         console.log(2);
+            //         checkPhoneVal = true;
+            //     }
+            // }
 
             function validationForm() {
-                if (checkPassVal == true && checkPasswordVal == true && checkEmailVal == true && checkPhoneVal == true) {
+                if (checkPassVal == true && checkPasswordVal == true) {
+                    
+                    console.log(checkPassVal);
+                    console.log(checkPasswordVal);
                     console.log("true kol imputs tmam");
-                    $("#registerBtn").removeClass("disabled")
+                    document.getElementById("registerBtn").removeAttribute("disabled");
                 }
-                if(checkPassVal == false && checkPasswordVal == false && checkEmailVal == false && checkPhoneVal == false){
-                    $("#registerBtn").addClass("disabled")
-                    console.log("b2et false y3am")
+                else {
+                    console.log(checkPasswordVal);
+                    console.log(checkPassVal);
+                    
+                    console.log("disabled");
+                    document.getElementById("registerBtn").setAttribute("disabled","disabled");
                 }
+
             };
         </script>
     </body>

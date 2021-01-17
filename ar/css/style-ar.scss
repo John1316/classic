@@ -61,8 +61,11 @@ body{
 .h-620px{
     height: 620px;
 }
-.w-50px{
+.w-70px{
     width: 70px;
+}
+.w-50px{
+    width: 50px;
 }
 .mt-25px{
     margin-top: 25px;
@@ -753,7 +756,13 @@ footer{
         }
     }
 }
-
+@media screen and (max-width:450px){
+    .login{
+        .w-400{
+            width: 300px !important;
+        }
+    }
+}
 input[type="checkbox"] {
     visibility: hidden;
 }
